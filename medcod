@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas" targetNamespace="http://www.ans.gov.br/padroes/tiss/schemas" elementFormDefault="qualified">
+	<!--VERS�O TISS 3.04.00 - TissSimpleTypesV3_04_00-->
+	<!-- Schema com os tipos simples de dados utilizados na constru��o dos tipos complexos -->
+
+	<simpleType name="st_codigoProcedimento">
+		<restriction base="string">
+			<pattern value="[a-zA-Z0-9]{1,10}"/>
+		</restriction>
+		</simpleType>
+	<simpleType name="st_registroANS">
+		<restriction base="string">
+			<maxLength value="6"/>
+			<pattern value="[0-9]{6}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto20">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="20"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_data">
+		<restriction base="date"/>
+	</simpleType>
+	<simpleType name="dm_simNao">
+		<restriction base="string">
+			<enumeration value="1"/>
+			<enumeration value="2"/>
+			<enumeration value="S"/>
+			<enumeration value="N"/>
+			<!-- S-Sim -->
+			<!-- N-Não  -->
+		</restriction>
+		</simpleType>
+
+<complexType name="ct_beneficiarioDados">
+		<sequence>
+			<element name="numeroCarteira" type="ans:st_texto20"/>
+			<element name="atendimentoRN" type="ans:dm_simNao"/>
+			<element name="nomeBeneficiario" type="ans:st_texto70"/>
+			<element name="numeroCNS" type="ans:st_texto15" minOccurs="0"/>
+			<element name="tipoIdent" type="ans:dm_tipoIdent" minOccurs="0"/>
+			<element name="identificadorBeneficiario" type="base64Binary" minOccurs="0"/>
+			<element name="templateBiometrico" type="base64Binary" minOccurs="0"/>
+		</sequence>
+</complexType>
+<complexType name="ct_guiaCabecalho">
+		<sequence>
+			<element name="registroANS" type="ans:st_registroANS"/>
+			<!--<element name="fontePagadora" type="ans:ct_fontePagadora"/>-->
+			<element name="numeroGuiaPrestador" type="ans:st_texto20"/>
+			<!--<element minOccurs="0" name="numeroGuiaOperadora" type="ans:st_texto20"/>-->
+		</sequence>
+	</complexType>
+
+
+<complexType name="ct_contratadoProfissionalDados">
+		<sequence>
+			<element name="nomeProfissional" type="ans:st_texto70" minOccurs="0"/>
+			<element name="conselhoProfissional" type="ans:dm_conselhoProfissional"/>
+			<element name="numeroConselhoProfissional" type="ans:st_texto15"/>
+			<element name="UF" type="ans:dm_UF"/>
+			<element name="CBOS" type="ans:dm_CBOS"/>
+		</sequence>
+	</complexType>
+
+<complexType name="ct_autorizacaoSADT">
+		<sequence>
+			<element name="numeroGuiaOperadora" type="ans:st_texto20" minOccurs="0"/>
+			<element name="dataAutorizacao" type="ans:st_data"/>
+			<element name="senha" type="ans:st_texto20" minOccurs="0"/>
+			<element name="dataValidadeSenha" type="ans:st_data" minOccurs="0"/>
+			<element name="ausenciaCodValidacao" type="ans:dm_ausenciaCodValidacao" minOccurs="0"/>
+			<element name="codValidacao" type="ans:st_texto10" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+
+
+<complexType name="ctm_sp-sadtSolicitacaoGuia">
+		<sequence>
+			<element name="cabecalhoSolicitacao" type="ans:ct_guiaCabecalho"/>
+			<element name="numeroGuiaPrincipal" type="ans:st_texto20" minOccurs="0"/>
+			<element name="ausenciaCodValidacao" type="ans:dm_ausenciaCodValidacao" minOccurs="0"/>
+			<element name="codValidacao" type="ans:st_texto10" minOccurs="0"/>
+			<element name="tipoEtapaAutorizacao" type="ans:dm_etapasAutorizacao"/>
+			<element name="dadosBeneficiario" type="ans:ct_beneficiarioDados"/>
+			<element name="dadosSolicitante">
+				<complexType>
+					<sequence>
+						<element name="contratadoSolicitante" type="ans:ct_contratadoDados"/>
+						<element name="profissionalSolicitante" type="ans:ct_contratadoProfissionalDados"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="caraterAtendimento" type="ans:dm_caraterAtendimento"/>
+			<element name="dataSolicitacao" type="ans:st_data"/>
+			<element name="indicacaoClinica" type="ans:st_texto500" minOccurs="0"/>
+			<element name="procedimentosSolicitados" maxOccurs="unbounded">
+				<complexType>
+					<sequence>
+						<element name="procedimento" type="ans:ct_procedimentoDados"/>
+						<element name="quantidadeSolicitada" type="ans:st_numerico3"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="dadosExecutante" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="codigonaOperadora" type="ans:st_texto14"/>
+						<element name="nomeContratado" type="ans:st_texto70"/>
+						<element name="CNES" type="ans:st_texto7"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="anexoClinico" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="solicitacaoQuimioterapia" type="ans:ctm_anexoSolicitacaoQuimio" minOccurs="0"/>
+						<element name="solicitacaoRadioterapia" type="ans:ctm_anexoSolicitacaoRadio" minOccurs="0"/>
+						<element name="solicitacaoOPME" type="ans:ctm_anexoSolicitacaoOPME" minOccurs="0"/>
+					</sequence>
+				</complexType>
+			</element>
+		<element name="observacao" type="ans:st_texto500" minOccurs="0"/>
+		<element name="relatorioTecnico" type="base64Binary" minOccurs="0"/>
+		</sequence>
+</complexType>
+
+<simpleType name="st_CNPJCPFPadrao">
+		<restriction base="string">
+			<pattern value="[0-9]{11,14}"/>
+		</restriction>
+		
+	</simpleType>
+	<simpleType name="st_grupoProcedimento">
+		<restriction base="string">
+			<pattern value="[0-9]{3}"/>
+		</restriction>
+		
+	</simpleType>
+	<simpleType name="st_dataPadrao">
+		<restriction base="date">
+			<minInclusive value="1850-01-01"/>
+		</restriction>	
+	</simpleType>
+	
+	<simpleType name="st_CNPJ">
+		<restriction base="string">
+			<pattern value="[0-9]{14}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_CPF">
+		<restriction base="string">
+			<pattern value="[0-9]{11}"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_competencia">
+		<restriction base="string">
+			<pattern value="[0-9]{4}[0-9]{2}"/>
+		</restriction>
+	</simpleType>
+
+
+	<simpleType name="st_texto1">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="1"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto2">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="2"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto3">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="3"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto4">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="4"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto5">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="5"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto6">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="6"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto7">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="7"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto8">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="8"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto10">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="10"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto11">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="11"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto12">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="12"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto14">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="14"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto15">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="15"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="st_texto30">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="30"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto32">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="32"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto40">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="40"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto60">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="60"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto70">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="70"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto100">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="100"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto150">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="150"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="st_texto500">
+		<restriction base="string">
+			<minLength value="1"/>
+			<maxLength value="500"/>
+		</restriction>
+		</simpleType>
+
+ <complexType name="ct_anexoCabecalho">
+		<sequence>
+			<element name="registroANS" type="ans:st_registroANS"/>
+			<element name="numeroGuiaAnexo" type="ans:st_texto20"/>
+			<element name="numeroGuiaReferenciada" type="ans:st_texto20"/>
+			<element name="numeroGuiaOperadora" type="ans:st_texto20" minOccurs="0"/>
+			<element name="dataSolicitacao" type="ans:st_data"/>
+			<element name="senha" type="ans:st_texto20" minOccurs="0"/>
+			<element name="dataAutorizacao" type="ans:st_data" minOccurs="0"/>
+		</sequence>
+</complexType>
+
+</schema>
