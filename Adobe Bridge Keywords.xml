@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<keywords version="2">
+	<item name="base dior" />
+	<item name="base dior pele madura" />
+	<item name="base mac" />
+	<item name="Bruna Tavares maquiagem pele base" />
+	<item name="CBHPM 18" />
+	<item name="dior maquiagem pele madura" />
+	<item name="DUT ANS" />
+	<set name="Eventos" disclosed="false">
+		<item name="Aniversário" />
+		<item name="Atualização de App" />
+		<item name="Casamento" />
+		<item name="Cirurgia" />
+		<item name="Consulta médica" />
+		<item name="Formatura" />
+		<set name="Lançamento produto" disclosed="true">
+			<item name="Maquiagem pele madura" />
+		</set>
+	</set>
+	<item name="Guia SADT SP" />
+	<set name="Lugares" disclosed="false">
+		<item name="Belo Horizonte - BH" />
+		<item name="Curitiba" />
+		<item name="Nova York" />
+		<item name="Paris" />
+		<item name="San Jose" />
+		<item name="São Francisco" />
+		<item name="São Paulo" />
+		<item name="Tóquio" />
+	</set>
+	<item name="mac pele madura" />
+	<item name="mercado livre" />
+	<set name="Outras Palavras-chave" disclosed="true">
+		<item name="Maquiagem produtos especiais" />
+	</set>
+	<set name="Pessoas" disclosed="false">
+		<item name="Dr Eric Grossi neurocirurgiao em BH" />
+		<item name="Lázaro Lambertucci 2019" />
+		<item name="Matthew" />
+		<item name="Miss Brasil Natália" />
+		<item name="Natalia Guimaraes" />
+		<item name="Natália Guimarães" />
+		<item name="Natalia miss universo" />
+		<item name="Ryan" />
+	</set>
+	<item name="sephora" />
+</keywords>
