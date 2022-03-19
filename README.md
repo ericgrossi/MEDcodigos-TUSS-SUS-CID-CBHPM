@@ -17,3 +17,4 @@ reguladora , Agência Nacional de Saúde (ANS))
 Screenshot da tela HOME:
 Mostra as principais seções do app
 
+![iphonemednewmaio](https://user-images.githubusercontent.com/34815726/159114551-8d988134-dc7a-497e-a798-db624b5f0456.png)
