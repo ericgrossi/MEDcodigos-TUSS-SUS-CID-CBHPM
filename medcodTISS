@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ans="http://www.ans.gov.br/padroes/tiss/schemas" targetNamespace="http://www.ans.gov.br/padroes/tiss/schemas" elementFormDefault="qualified">
-	<!--VERS�O TISS 3.04.00 - TissSimpleTypesV3_04_00-->
-	<!-- Schema com os tipos simples de dados utilizados na constru��o dos tipos complexos -->
+	<!--VERSÃO TISS 3.04.00 - TissSimpleTypesV3_04_00-->
+	<!-- Schema com os tipos simples de dados utilizados na construção dos tipos complexos -->
 
 	<simpleType name="st_codigoProcedimento">
 		<restriction base="string">
